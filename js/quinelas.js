@@ -19,44 +19,95 @@ class QuinelasApp {
     }
 
     normalizeTeamName(teamName) {
+        // Add logging to debug team names
+        console.log('Team name received:', teamName);
+        
         // Map team names to shield file names
         const teamMappings = {
-            // Liga MX mappings
+            // Liga MX mappings - Adding more variations
             'Club América': 'america',
             'CF América': 'america',
             'América': 'america',
+            'America': 'america',
+            'Club America': 'america',
+            
             'Atlas FC': 'atlas',
             'Atlas': 'atlas',
+            
             'Atlético San Luis': 'atleticosl',
+            'Atletico San Luis': 'atleticosl',
+            'Club Atlético San Luis': 'atleticosl',
+            'San Luis': 'atleticosl',
+            
             'Cruz Azul': 'cruzazul',
+            'Cruz Azul FC': 'cruzazul',
+            
             'Guadalajara': 'guadalajara',
+            'Club Guadalajara': 'guadalajara',
             'Chivas': 'guadalajara',
+            'Chivas Guadalajara': 'guadalajara',
+            'CD Guadalajara': 'guadalajara',
+            
             'FC Juárez': 'juarez',
+            'FC Juarez': 'juarez',
             'Juárez': 'juarez',
+            'Juarez': 'juarez',
+            'Club Juarez': 'juarez',
+            
             'León': 'leon',
+            'Leon': 'leon',
             'Club León': 'leon',
+            'Club Leon': 'leon',
+            
             'FC Mazatlán': 'mazatlan',
+            'FC Mazatlan': 'mazatlan',
             'Mazatlán': 'mazatlan',
+            'Mazatlan': 'mazatlan',
+            
             'Monterrey': 'monterrey',
             'CF Monterrey': 'monterrey',
+            'Club Monterrey': 'monterrey',
+            'Rayados': 'monterrey',
+            
             'Club Necaxa': 'necaxa',
             'Necaxa': 'necaxa',
+            
             'CF Pachuca': 'pachuca',
             'Pachuca': 'pachuca',
+            'Club Pachuca': 'pachuca',
+            
             'FC Puebla': 'puebla',
             'Puebla': 'puebla',
+            'Club Puebla': 'puebla',
+            
             'Pumas UNAM': 'pumas',
             'Pumas': 'pumas',
+            'Club Universidad Nacional': 'pumas',
+            'Universidad Nacional': 'pumas',
+            
             'FC Querétaro': 'queretaro',
+            'FC Queretaro': 'queretaro',
             'Querétaro': 'queretaro',
+            'Queretaro': 'queretaro',
+            'Club Querétaro': 'queretaro',
+            'Club Queretaro': 'queretaro',
+            
             'Santos Laguna': 'santos',
             'Santos': 'santos',
+            'Club Santos': 'santos',
+            
             'Tigres UANL': 'tigres',
             'Tigres': 'tigres',
+            'Club Tigres': 'tigres',
+            
             'Club Tijuana': 'tijuana',
             'Tijuana': 'tijuana',
+            'Club de Fútbol Tijuana': 'tijuana',
+            'Xolos': 'tijuana',
+            
             'Toluca FC': 'toluca',
             'Toluca': 'toluca',
+            'Club Toluca': 'toluca',
             
             // MLS mappings
             'Atlanta United FC': 'atlanta',
@@ -107,7 +158,24 @@ class QuinelasApp {
             'Vancouver Whitecaps': 'vancouver'
         };
 
-        return teamMappings[teamName] || teamName.toLowerCase().replace(/[^a-z0-9]/g, '');
+        const mapped = teamMappings[teamName];
+        if (mapped) {
+            console.log(`Mapped "${teamName}" to "${mapped}"`);
+            return mapped;
+        }
+        
+        // Try without accents
+        const withoutAccents = teamName.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        const mappedWithoutAccents = teamMappings[withoutAccents];
+        if (mappedWithoutAccents) {
+            console.log(`Mapped "${teamName}" (without accents: "${withoutAccents}") to "${mappedWithoutAccents}"`);
+            return mappedWithoutAccents;
+        }
+        
+        // Fallback: clean the team name
+        const fallback = teamName.toLowerCase().replace(/[^a-z0-9]/g, '');
+        console.log(`No mapping found for "${teamName}", using fallback: "${fallback}"`);
+        return fallback;
     }
 
     init() {
@@ -349,8 +417,10 @@ class QuinelasApp {
             <!-- Teams matchup display -->
             <div class="flex items-center justify-between mb-6 px-2">
                 <div class="flex flex-col items-center text-center flex-1">
-                    <img src="${homeShield}" alt="${homeTeam}" class="w-12 h-12 sm:w-16 sm:h-16 mb-2 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <div class="text-2xl sm:text-3xl font-bold text-crimson hidden">🏠</div>
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 mb-2 flex items-center justify-center">
+                        <img src="${homeShield}" alt="${homeTeam}" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'; console.log('Failed to load: ${homeShield}');">
+                        <div class="text-2xl sm:text-3xl font-bold text-crimson hidden items-center justify-center">🏠</div>
+                    </div>
                     <span class="text-xs sm:text-sm font-bold text-white leading-tight">${homeTeam}</span>
                     <span class="text-xs text-gray-400">LOCAL</span>
                 </div>
@@ -361,8 +431,10 @@ class QuinelasApp {
                 </div>
                 
                 <div class="flex flex-col items-center text-center flex-1">
-                    <img src="${awayShield}" alt="${awayTeam}" class="w-12 h-12 sm:w-16 sm:h-16 mb-2 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <div class="text-2xl sm:text-3xl font-bold text-crimson hidden">✈️</div>
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 mb-2 flex items-center justify-center">
+                        <img src="${awayShield}" alt="${awayTeam}" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'; console.log('Failed to load: ${awayShield}');">
+                        <div class="text-2xl sm:text-3xl font-bold text-crimson hidden items-center justify-center">✈️</div>
+                    </div>
                     <span class="text-xs sm:text-sm font-bold text-white leading-tight">${awayTeam}</span>
                     <span class="text-xs text-gray-400">VISITANTE</span>
                 </div>
@@ -377,8 +449,10 @@ class QuinelasApp {
                     data-team="${homeTeam}"
                 >
                     <div class="flex flex-col items-center">
-                        <img src="${homeShield}" alt="${homeTeam}" class="w-8 h-8 sm:w-10 sm:h-10 mb-2 object-contain group-hover:scale-110 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                        <div class="text-lg sm:text-xl font-bold text-crimson hidden">🏠</div>
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 mb-2 flex items-center justify-center">
+                            <img src="${homeShield}" alt="${homeTeam}" class="w-full h-full object-contain group-hover:scale-110 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-lg sm:text-xl font-bold text-crimson hidden items-center justify-center">🏠</div>
+                        </div>
                         <div class="text-xs text-gray-400 uppercase tracking-wide">Local</div>
                         <div class="text-white font-bold text-xs sm:text-sm leading-tight mt-1">${homeTeam.split(' ')[0]}</div>
                     </div>
@@ -408,8 +482,10 @@ class QuinelasApp {
                     data-team="${awayTeam}"
                 >
                     <div class="flex flex-col items-center">
-                        <img src="${awayShield}" alt="${awayTeam}" class="w-8 h-8 sm:w-10 sm:h-10 mb-2 object-contain group-hover:scale-110 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                        <div class="text-lg sm:text-xl font-bold text-crimson hidden">✈️</div>
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 mb-2 flex items-center justify-center">
+                            <img src="${awayShield}" alt="${awayTeam}" class="w-full h-full object-contain group-hover:scale-110 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="text-lg sm:text-xl font-bold text-crimson hidden items-center justify-center">✈️</div>
+                        </div>
                         <div class="text-xs text-gray-400 uppercase tracking-wide">Visitante</div>
                         <div class="text-white font-bold text-xs sm:text-sm leading-tight mt-1">${awayTeam.split(' ')[0]}</div>
                     </div>
