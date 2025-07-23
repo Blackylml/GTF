@@ -63,14 +63,14 @@
 <body class="min-h-screen text-white">
     <div class="container mx-auto px-4 py-8">
         <!-- Header -->
-        <div class="glass-effect neon-border rounded-xl p-8 mb-8 animate-fadeIn">
-            <h1 class="text-5xl font-black text-center gradient-text mb-4">
+        <div class="glass-effect neon-border rounded-xl p-4 sm:p-8 mb-8 animate-fadeIn">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-center gradient-text mb-4">
                 🔥 QUINELAS DEPORTIVAS
             </h1>
-            <h2 class="text-2xl font-bold text-center text-crimson mb-3">
+            <h2 class="text-lg sm:text-xl lg:text-2xl font-bold text-center text-crimson mb-3">
                 Sistema de Predicciones
             </h2>
-            <p class="text-center text-gray-300 text-lg">
+            <p class="text-center text-gray-300 text-base sm:text-lg">
                 Selecciona una quinela y predice los resultados
             </p>
             <div class="flex justify-center mt-4">
@@ -79,11 +79,11 @@
         </div>
 
         <!-- Quinela Selection -->
-        <div id="quinela-selection" class="glass-effect neon-border rounded-xl p-8 mb-8 animate-fadeIn">
-            <h2 class="text-3xl font-bold gradient-text mb-6 text-center">
+        <div id="quinela-selection" class="glass-effect neon-border rounded-xl p-4 sm:p-6 lg:p-8 mb-8 animate-fadeIn">
+            <h2 class="text-2xl sm:text-3xl font-bold gradient-text mb-4 sm:mb-6 text-center">
                 📋 Selecciona tu Quinela
             </h2>
-            <div id="quinela-types-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div id="quinela-types-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 <!-- Quinela types will be populated here -->
             </div>
         </div>
@@ -114,27 +114,31 @@
         </div>
 
         <!-- Selected Quinela Info -->
-        <div id="selected-quinela-info" class="glass-effect neon-border rounded-xl p-6 mb-8 animate-fadeIn hidden">
+        <div id="selected-quinela-info" class="glass-effect neon-border rounded-xl p-4 sm:p-6 mb-8 animate-fadeIn hidden">
             <!-- Back Button -->
             <div class="flex items-center mb-4">
                 <button 
                     id="back-to-selection" 
-                    class="flex items-center text-gray-300 hover:text-crimson transition-colors mr-4"
+                    class="flex items-center text-gray-300 hover:text-crimson transition-colors mr-4 text-sm sm:text-base"
                 >
                     ← Volver a Quinelas
                 </button>
             </div>
             
-            <div class="flex justify-between items-center">
-                <div>
-                    <h3 class="text-xl font-bold gradient-text" id="selected-quinela-name"></h3>
-                    <p class="text-gray-300" id="selected-quinela-description"></p>
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                <div class="flex-1">
+                    <h3 class="text-lg sm:text-xl font-bold gradient-text" id="selected-quinela-name"></h3>
+                    <p class="text-gray-300 text-sm sm:text-base" id="selected-quinela-description"></p>
                 </div>
-                <div class="text-right">
-                    <div class="text-sm text-gray-400">Precio</div>
-                    <div class="text-2xl font-bold text-crimson" id="selected-quinela-price"></div>
-                    <div class="text-sm text-gray-400">Bolsa Acumulada</div>
-                    <div class="text-lg font-bold text-yellow-400" id="selected-quinela-pot"></div>
+                <div class="flex flex-row sm:flex-col sm:text-right gap-4 sm:gap-0">
+                    <div class="flex-1 sm:flex-none">
+                        <div class="text-xs sm:text-sm text-gray-400">Precio</div>
+                        <div class="text-xl sm:text-2xl font-bold text-crimson" id="selected-quinela-price"></div>
+                    </div>
+                    <div class="flex-1 sm:flex-none">
+                        <div class="text-xs sm:text-sm text-gray-400">Bolsa Acumulada</div>
+                        <div class="text-lg font-bold text-yellow-400" id="selected-quinela-pot"></div>
+                    </div>
                 </div>
             </div>
             
@@ -153,36 +157,36 @@
         <!-- Matches Container -->
         <div id="matches-container" class="hidden">
             <!-- Liga MX Matches -->
-            <div class="glass-effect neon-border rounded-xl p-8 mb-8 animate-fadeIn">
-                <h2 class="text-3xl font-bold gradient-text mb-8 flex items-center justify-center">
-                    🇲🇽 LIGA MX
-                    <span class="ml-4 text-lg text-gray-300 font-normal">Jornada del Fin de Semana</span>
+            <div class="glass-effect neon-border rounded-xl p-4 sm:p-6 lg:p-8 mb-8 animate-fadeIn">
+                <h2 class="text-2xl sm:text-3xl font-bold gradient-text mb-6 sm:mb-8 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
+                    <span>🇲🇽 LIGA MX</span>
+                    <span class="text-sm sm:text-lg text-gray-300 font-normal">Jornada del Fin de Semana</span>
                 </h2>
-                <div id="liga-mx-matches" class="space-y-6">
+                <div id="liga-mx-matches" class="space-y-4 sm:space-y-6">
                     <!-- Liga MX matches will be populated here -->
                 </div>
             </div>
 
             <!-- MLS Matches -->
-            <div class="glass-effect neon-border rounded-xl p-8 mb-8 animate-fadeIn">
-                <h2 class="text-3xl font-bold gradient-text mb-8 flex items-center justify-center">
-                    🇺🇸 MLS
-                    <span class="ml-4 text-lg text-gray-300 font-normal">Partidos Destacados</span>
+            <div class="glass-effect neon-border rounded-xl p-4 sm:p-6 lg:p-8 mb-8 animate-fadeIn">
+                <h2 class="text-2xl sm:text-3xl font-bold gradient-text mb-6 sm:mb-8 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
+                    <span>🇺🇸 MLS</span>
+                    <span class="text-sm sm:text-lg text-gray-300 font-normal">Partidos Destacados</span>
                 </h2>
-                <div id="mls-matches" class="space-y-6">
+                <div id="mls-matches" class="space-y-4 sm:space-y-6">
                     <!-- MLS matches will be populated here -->
                 </div>
             </div>
 
 
             <!-- Submit Section -->
-            <div class="glass-effect neon-border rounded-xl p-8 animate-fadeIn">
+            <div class="glass-effect neon-border rounded-xl p-4 sm:p-6 lg:p-8 animate-fadeIn">
                 <div class="text-center">
                     <div class="mb-6">
-                        <p class="text-gray-300 text-xl mb-2">
+                        <p class="text-gray-300 text-lg sm:text-xl mb-2">
                             Selecciones realizadas:
                         </p>
-                        <div class="text-6xl font-black gradient-text">
+                        <div class="text-4xl sm:text-5xl lg:text-6xl font-black gradient-text">
                             <span id="selected-count">0</span><span class="text-gray-500">/12</span>
                         </div>
                         
@@ -194,7 +198,7 @@
                     
                     <button 
                         id="submit-btn" 
-                        class="bg-gradient-to-r from-dark-red to-crimson text-white px-12 py-4 rounded-xl font-bold text-xl hover:from-crimson hover:to-dark-red transition-all duration-300 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed transform hover:scale-105 hover:shadow-2xl neon-border"
+                        class="bg-gradient-to-r from-dark-red to-crimson text-white px-6 sm:px-8 lg:px-12 py-3 sm:py-4 rounded-xl font-bold text-lg sm:text-xl hover:from-crimson hover:to-dark-red transition-all duration-300 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed transform hover:scale-105 hover:shadow-2xl neon-border w-full sm:w-auto"
                         disabled
                     >
                         🎯 Generar Quinela
@@ -204,25 +208,25 @@
         </div>
 
         <!-- Confirmation Modal -->
-        <div id="confirmation-modal" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50 backdrop-blur-sm">
-            <div class="glass-effect neon-border rounded-2xl p-8 max-w-md mx-4 animate-fadeIn">
-                <h3 class="text-2xl font-bold gradient-text mb-4 text-center">
+        <div id="confirmation-modal" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50 backdrop-blur-sm p-4">
+            <div class="glass-effect neon-border rounded-2xl p-6 sm:p-8 max-w-md w-full animate-fadeIn">
+                <h3 class="text-xl sm:text-2xl font-bold gradient-text mb-4 text-center">
                     ⚠️ Confirmar Quinela
                 </h3>
                 <div class="text-center text-gray-300 mb-6">
-                    <p class="mb-2">¿Estás seguro de generar la quinela?</p>
-                    <p class="text-sm text-gray-400">Esta acción no se puede deshacer.</p>
+                    <p class="mb-2 text-sm sm:text-base">¿Estás seguro de generar la quinela?</p>
+                    <p class="text-xs sm:text-sm text-gray-400">Esta acción no se puede deshacer.</p>
                 </div>
-                <div class="flex gap-4">
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
                     <button 
                         id="confirm-cancel" 
-                        class="flex-1 bg-gradient-to-r from-gray-600 to-gray-800 text-white py-3 px-4 rounded-xl hover:from-gray-700 hover:to-gray-900 transition-all duration-300 font-bold"
+                        class="flex-1 bg-gradient-to-r from-gray-600 to-gray-800 text-white py-3 px-4 rounded-xl hover:from-gray-700 hover:to-gray-900 transition-all duration-300 font-bold text-sm sm:text-base"
                     >
                         ❌ Cancelar
                     </button>
                     <button 
                         id="confirm-submit" 
-                        class="flex-1 bg-gradient-to-r from-dark-red to-crimson text-white py-3 px-4 rounded-xl hover:from-crimson hover:to-dark-red transition-all duration-300 font-bold"
+                        class="flex-1 bg-gradient-to-r from-dark-red to-crimson text-white py-3 px-4 rounded-xl hover:from-crimson hover:to-dark-red transition-all duration-300 font-bold text-sm sm:text-base"
                     >
                         ✅ Confirmar
                     </button>
@@ -231,44 +235,44 @@
         </div>
 
         <!-- Result Modal -->
-        <div id="result-modal" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50 backdrop-blur-sm">
-            <div class="glass-effect neon-border rounded-2xl p-10 max-w-lg mx-4 animate-fadeIn">
-                <h3 class="text-3xl font-bold gradient-text mb-6 text-center animate-glow">
+        <div id="result-modal" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50 backdrop-blur-sm p-4">
+            <div class="glass-effect neon-border rounded-2xl p-6 sm:p-8 lg:p-10 max-w-lg w-full animate-fadeIn max-h-screen overflow-y-auto">
+                <h3 class="text-2xl sm:text-3xl font-bold gradient-text mb-4 sm:mb-6 text-center animate-glow">
                     🎉 QUINELA GENERADA
                 </h3>
                 <div class="text-center">
-                    <p class="text-gray-300 text-lg mb-6">Tu folio de identificación:</p>
-                    <div class="glass-effect p-6 rounded-xl mb-8 neon-border">
-                        <span id="folio-display" class="text-4xl font-black gradient-text tracking-wider"></span>
+                    <p class="text-gray-300 text-base sm:text-lg mb-4 sm:mb-6">Tu folio de identificación:</p>
+                    <div class="glass-effect p-4 sm:p-6 rounded-xl mb-6 sm:mb-8 neon-border">
+                        <span id="folio-display" class="text-2xl sm:text-3xl lg:text-4xl font-black gradient-text tracking-wider block break-all"></span>
                     </div>
                     
                     <!-- Summary -->
-                    <div class="bg-charcoal p-4 rounded-lg border border-gray-600 mb-6">
-                        <div class="grid grid-cols-2 gap-4 text-sm">
-                            <div>
-                                <span class="text-gray-400">Quinela:</span>
+                    <div class="bg-charcoal p-3 sm:p-4 rounded-lg border border-gray-600 mb-4 sm:mb-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-sm">
+                            <div class="text-center sm:text-left">
+                                <span class="text-gray-400 block sm:inline">Quinela:</span>
                                 <div class="text-white font-semibold" id="summary-quinela"></div>
                             </div>
-                            <div>
-                                <span class="text-gray-400">Precio:</span>
+                            <div class="text-center sm:text-left">
+                                <span class="text-gray-400 block sm:inline">Precio:</span>
                                 <div class="text-crimson font-semibold" id="summary-price"></div>
                             </div>
                         </div>
                     </div>
                     
-                    <p class="text-sm text-gray-400 mb-8 bg-charcoal p-3 rounded-lg border border-gray-600">
+                    <p class="text-xs sm:text-sm text-gray-400 mb-6 sm:mb-8 bg-charcoal p-3 rounded-lg border border-gray-600">
                         💾 Guarda este folio para verificar tus predicciones más tarde
                     </p>
-                    <div class="space-y-4">
+                    <div class="space-y-3 sm:space-y-4">
                         <button 
                             id="copy-folio" 
-                            class="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white py-3 px-6 rounded-xl hover:from-blue-700 hover:to-blue-900 transition-all duration-300 font-bold transform hover:scale-105 neon-border"
+                            class="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white py-3 px-4 sm:px-6 rounded-xl hover:from-blue-700 hover:to-blue-900 transition-all duration-300 font-bold transform hover:scale-105 neon-border text-sm sm:text-base"
                         >
                             📋 Copiar Folio
                         </button>
                         <button 
                             id="new-quinela" 
-                            class="w-full bg-gradient-to-r from-dark-red to-crimson text-white py-3 px-6 rounded-xl hover:from-crimson hover:to-dark-red transition-all duration-300 font-bold transform hover:scale-105 neon-border"
+                            class="w-full bg-gradient-to-r from-dark-red to-crimson text-white py-3 px-4 sm:px-6 rounded-xl hover:from-crimson hover:to-dark-red transition-all duration-300 font-bold transform hover:scale-105 neon-border text-sm sm:text-base"
                         >
                             🆕 Nueva Quinela
                         </button>

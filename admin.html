@@ -63,14 +63,14 @@
 <body class="min-h-screen text-white">
     <div class="container mx-auto px-4 py-8">
         <!-- Header -->
-        <div class="glass-effect neon-border rounded-xl p-8 mb-8 animate-fadeIn">
-            <h1 class="text-4xl font-black gradient-text mb-4 text-center">
+        <div class="glass-effect neon-border rounded-xl p-4 sm:p-6 lg:p-8 mb-8 animate-fadeIn">
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black gradient-text mb-4 text-center">
                 ⚙️ PANEL DE ADMINISTRACIÓN
             </h1>
-            <h2 class="text-xl font-bold text-center text-crimson mb-3">
+            <h2 class="text-lg sm:text-xl font-bold text-center text-crimson mb-3">
                 Sistema de Quinelas
             </h2>
-            <p class="text-gray-300 text-center text-lg">
+            <p class="text-gray-300 text-center text-sm sm:text-base lg:text-lg">
                 Consulta y gestiona las predicciones por folio
             </p>
             <div class="flex justify-center mt-4">
@@ -79,18 +79,18 @@
         </div>
 
         <!-- Search Section -->
-        <div class="glass-effect neon-border rounded-xl p-8 mb-8 animate-fadeIn">
-            <h2 class="text-2xl font-bold gradient-text mb-6">🔍 Buscar por Folio</h2>
-            <div class="flex gap-4">
+        <div class="glass-effect neon-border rounded-xl p-4 sm:p-6 lg:p-8 mb-8 animate-fadeIn">
+            <h2 class="text-xl sm:text-2xl font-bold gradient-text mb-4 sm:mb-6">🔍 Buscar por Folio</h2>
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <input 
                     type="text" 
                     id="folio-search" 
                     placeholder="Ingresa el folio (ej: Q12345678)"
-                    class="flex-1 px-6 py-4 bg-charcoal border-2 border-gray-600 rounded-xl focus:outline-none focus:border-crimson focus:ring-2 focus:ring-crimson/50 text-white placeholder-gray-400 text-lg font-semibold"
+                    class="flex-1 px-4 sm:px-6 py-3 sm:py-4 bg-charcoal border-2 border-gray-600 rounded-xl focus:outline-none focus:border-crimson focus:ring-2 focus:ring-crimson/50 text-white placeholder-gray-400 text-base sm:text-lg font-semibold"
                 >
                 <button 
                     id="search-btn"
-                    class="bg-gradient-to-r from-dark-red to-crimson text-white px-8 py-4 rounded-xl hover:from-crimson hover:to-dark-red transition-all duration-300 font-bold text-lg transform hover:scale-105 neon-border"
+                    class="bg-gradient-to-r from-dark-red to-crimson text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:from-crimson hover:to-dark-red transition-all duration-300 font-bold text-base sm:text-lg transform hover:scale-105 neon-border whitespace-nowrap"
                 >
                     🔍 Buscar
                 </button>
@@ -112,39 +112,39 @@
         <!-- Results -->
         <div id="results" class="hidden">
             <!-- Prediction Info -->
-            <div class="glass-effect neon-border rounded-xl p-8 mb-8 animate-fadeIn">
-                <h3 class="text-2xl font-bold gradient-text mb-6">📊 Información de la Quinela</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-charcoal border border-gray-600 p-6 rounded-xl">
-                        <p class="text-sm text-gray-400 uppercase tracking-wide mb-2">Folio</p>
-                        <p id="result-folio" class="text-2xl font-bold gradient-text"></p>
+            <div class="glass-effect neon-border rounded-xl p-4 sm:p-6 lg:p-8 mb-8 animate-fadeIn">
+                <h3 class="text-xl sm:text-2xl font-bold gradient-text mb-4 sm:mb-6">📊 Información de la Quinela</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+                    <div class="bg-charcoal border border-gray-600 p-4 sm:p-6 rounded-xl">
+                        <p class="text-xs sm:text-sm text-gray-400 uppercase tracking-wide mb-2">Folio</p>
+                        <p id="result-folio" class="text-lg sm:text-2xl font-bold gradient-text break-all"></p>
                     </div>
-                    <div class="bg-charcoal border border-gray-600 p-6 rounded-xl">
-                        <p class="text-sm text-gray-400 uppercase tracking-wide mb-2">Fecha de Creación</p>
-                        <p id="result-date" class="text-lg font-semibold text-white"></p>
+                    <div class="bg-charcoal border border-gray-600 p-4 sm:p-6 rounded-xl">
+                        <p class="text-xs sm:text-sm text-gray-400 uppercase tracking-wide mb-2">Fecha de Creación</p>
+                        <p id="result-date" class="text-sm sm:text-lg font-semibold text-white"></p>
                     </div>
-                    <div class="bg-charcoal border border-gray-600 p-6 rounded-xl">
-                        <p class="text-sm text-gray-400 uppercase tracking-wide mb-2">Total de Partidos</p>
-                        <p id="result-total" class="text-lg font-semibold text-crimson"></p>
+                    <div class="bg-charcoal border border-gray-600 p-4 sm:p-6 rounded-xl">
+                        <p class="text-xs sm:text-sm text-gray-400 uppercase tracking-wide mb-2">Total de Partidos</p>
+                        <p id="result-total" class="text-sm sm:text-lg font-semibold text-crimson"></p>
                     </div>
                 </div>
             </div>
 
             <!-- Predictions List -->
-            <div class="glass-effect neon-border rounded-xl p-8 animate-fadeIn">
-                <h3 class="text-2xl font-bold gradient-text mb-6">🎯 Predicciones</h3>
-                <div id="predictions-list" class="space-y-4">
+            <div class="glass-effect neon-border rounded-xl p-4 sm:p-6 lg:p-8 animate-fadeIn">
+                <h3 class="text-xl sm:text-2xl font-bold gradient-text mb-4 sm:mb-6">🎯 Predicciones</h3>
+                <div id="predictions-list" class="space-y-3 sm:space-y-4">
                     <!-- Predictions will be populated here -->
                 </div>
             </div>
         </div>
 
         <!-- Validation Section -->
-        <div class="glass-effect neon-border rounded-xl p-8 mt-8 animate-fadeIn">
-            <h3 class="text-2xl font-bold gradient-text mb-6">✅ Validación de Pagos</h3>
+        <div class="glass-effect neon-border rounded-xl p-4 sm:p-6 lg:p-8 mt-8 animate-fadeIn">
+            <h3 class="text-xl sm:text-2xl font-bold gradient-text mb-4 sm:mb-6">✅ Validación de Pagos</h3>
             <button 
                 id="load-pending"
-                class="bg-gradient-to-r from-yellow-600 to-orange-600 text-white px-6 py-3 rounded-xl hover:from-yellow-700 hover:to-orange-700 transition-all duration-300 font-bold transform hover:scale-105 neon-border mb-6"
+                class="bg-gradient-to-r from-yellow-600 to-orange-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl hover:from-yellow-700 hover:to-orange-700 transition-all duration-300 font-bold transform hover:scale-105 neon-border mb-6 text-sm sm:text-base w-full sm:w-auto"
             >
                 ⏳ Cargar Quinelas Pendientes
             </button>
@@ -154,11 +154,11 @@
         </div>
 
         <!-- Recent Predictions -->
-        <div class="glass-effect neon-border rounded-xl p-8 mt-8 animate-fadeIn">
-            <h3 class="text-2xl font-bold gradient-text mb-6">📈 Quinelas Recientes</h3>
+        <div class="glass-effect neon-border rounded-xl p-4 sm:p-6 lg:p-8 mt-8 animate-fadeIn">
+            <h3 class="text-xl sm:text-2xl font-bold gradient-text mb-4 sm:mb-6">📈 Quinelas Recientes</h3>
             <button 
                 id="load-recent"
-                class="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-blue-900 transition-all duration-300 font-bold transform hover:scale-105 neon-border mb-6"
+                class="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl hover:from-blue-700 hover:to-blue-900 transition-all duration-300 font-bold transform hover:scale-105 neon-border mb-6 text-sm sm:text-base w-full sm:w-auto"
             >
                 📊 Cargar Últimas 10 Quinelas
             </button>
@@ -238,7 +238,7 @@
 
                 prediction.matches.forEach(match => {
                     const predictionDiv = document.createElement('div');
-                    predictionDiv.className = 'glass-effect border border-gray-600 rounded-xl p-6 hover:neon-border transition-all duration-300';
+                    predictionDiv.className = 'glass-effect border border-gray-600 rounded-xl p-4 sm:p-6 hover:neon-border transition-all duration-300';
                     
                     let predictionText = '';
                     let predictionClass = '';
@@ -257,21 +257,21 @@
                     const matchDate = new Date(match.match_date).toLocaleString('es-MX');
                     
                     predictionDiv.innerHTML = `
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h4 class="font-bold text-white text-lg mb-2">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
+                            <div class="flex-1">
+                                <h4 class="font-bold text-white text-base sm:text-lg mb-2">
                                     ⚽ Partido ${parseInt(match.match_number) + 1} - ${match.league}
                                 </h4>
-                                <p class="text-gray-300 mb-3 text-lg">
+                                <p class="text-gray-300 mb-3 text-sm sm:text-lg">
                                     ${match.home_team} <span class="text-gray-500">vs</span> ${match.away_team}
                                 </p>
-                                <div class="bg-charcoal p-3 rounded-lg border border-gray-700">
-                                    <p class="${predictionClass} text-lg">
+                                <div class="bg-charcoal p-2 sm:p-3 rounded-lg border border-gray-700">
+                                    <p class="${predictionClass} text-sm sm:text-lg">
                                         ${predictionText}
                                     </p>
                                 </div>
                             </div>
-                            <div class="text-right text-sm text-gray-400 bg-charcoal p-2 rounded-lg">
+                            <div class="text-center sm:text-right text-xs sm:text-sm text-gray-400 bg-charcoal p-2 rounded-lg self-start">
                                 📅 ${matchDate}
                             </div>
                         </div>
@@ -329,32 +329,32 @@
                     const date = new Date(prediction.created_at).toLocaleString('es-MX');
                     
                     predictionDiv.innerHTML = `
-                        <div class="flex justify-between items-center mb-4">
-                            <div>
-                                <span class="font-bold text-crimson text-lg">${prediction.folio}</span>
-                                <span class="text-sm text-gray-400 ml-3 bg-charcoal px-2 py-1 rounded">${date}</span>
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-3">
+                            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+                                <span class="font-bold text-crimson text-base sm:text-lg break-all">${prediction.folio}</span>
+                                <span class="text-xs sm:text-sm text-gray-400 bg-charcoal px-2 py-1 rounded text-center sm:text-left">${date}</span>
                             </div>
-                            <div class="text-right">
-                                <div class="text-sm text-gray-400">${prediction.quinela_name}</div>
-                                <div class="text-lg font-bold text-yellow-400">$${prediction.price}</div>
+                            <div class="text-center sm:text-right">
+                                <div class="text-xs sm:text-sm text-gray-400">${prediction.quinela_name}</div>
+                                <div class="text-base sm:text-lg font-bold text-yellow-400">$${prediction.price}</div>
                             </div>
                         </div>
-                        <div class="flex gap-3">
+                        <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
                             <button 
                                 onclick="adminApp.validatePrediction('${prediction.folio}', 'validate')"
-                                class="flex-1 bg-gradient-to-r from-green-600 to-green-800 text-white py-2 px-4 rounded-lg hover:from-green-700 hover:to-green-900 transition-all duration-300 font-bold"
+                                class="flex-1 bg-gradient-to-r from-green-600 to-green-800 text-white py-2 px-3 sm:px-4 rounded-lg hover:from-green-700 hover:to-green-900 transition-all duration-300 font-bold text-sm sm:text-base"
                             >
                                 ✅ Validar
                             </button>
                             <button 
                                 onclick="adminApp.validatePrediction('${prediction.folio}', 'reject')"
-                                class="flex-1 bg-gradient-to-r from-red-600 to-red-800 text-white py-2 px-4 rounded-lg hover:from-red-700 hover:to-red-900 transition-all duration-300 font-bold"
+                                class="flex-1 bg-gradient-to-r from-red-600 to-red-800 text-white py-2 px-3 sm:px-4 rounded-lg hover:from-red-700 hover:to-red-900 transition-all duration-300 font-bold text-sm sm:text-base"
                             >
                                 ❌ Rechazar
                             </button>
                             <button 
                                 onclick="adminApp.viewPrediction('${prediction.folio}')"
-                                class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-2 px-4 rounded-lg hover:from-blue-700 hover:to-blue-900 transition-all duration-300 font-bold"
+                                class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-2 px-3 sm:px-4 rounded-lg hover:from-blue-700 hover:to-blue-900 transition-all duration-300 font-bold text-sm sm:text-base whitespace-nowrap"
                             >
                                 👁️ Ver
                             </button>
@@ -411,16 +411,16 @@
 
                 predictions.forEach(prediction => {
                     const predictionDiv = document.createElement('div');
-                    predictionDiv.className = 'flex justify-between items-center p-4 glass-effect border border-gray-600 rounded-xl cursor-pointer hover:neon-border transition-all duration-300 transform hover:scale-105';
+                    predictionDiv.className = 'flex flex-col sm:flex-row sm:justify-between sm:items-center p-4 glass-effect border border-gray-600 rounded-xl cursor-pointer hover:neon-border transition-all duration-300 transform hover:scale-105 gap-3';
                     
                     const date = new Date(prediction.created_at).toLocaleString('es-MX');
                     
                     predictionDiv.innerHTML = `
-                        <div>
-                            <span class="font-bold text-crimson text-lg">${prediction.folio}</span>
-                            <span class="text-sm text-gray-400 ml-3 bg-charcoal px-2 py-1 rounded">${date}</span>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+                            <span class="font-bold text-crimson text-base sm:text-lg break-all">${prediction.folio}</span>
+                            <span class="text-xs sm:text-sm text-gray-400 bg-charcoal px-2 py-1 rounded text-center sm:text-left">${date}</span>
                         </div>
-                        <div class="text-sm text-gray-300 bg-charcoal px-3 py-1 rounded-lg">
+                        <div class="text-xs sm:text-sm text-gray-300 bg-charcoal px-3 py-1 rounded-lg text-center">
                             ⚽ ${prediction.total_matches} partidos
                         </div>
                     `;

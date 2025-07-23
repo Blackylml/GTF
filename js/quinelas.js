@@ -106,21 +106,21 @@ class QuinelasApp {
         
         card.innerHTML = `
             <div class="text-center">
-                <h3 class="text-xl font-bold gradient-text mb-3">${quinelType.name}</h3>
-                <p class="text-gray-300 mb-4">${quinelType.description}</p>
+                <h3 class="text-lg sm:text-xl font-bold gradient-text mb-3">${quinelType.name}</h3>
+                <p class="text-gray-300 mb-4 text-sm sm:text-base">${quinelType.description}</p>
                 
-                <div class="grid grid-cols-2 gap-4 mb-4">
-                    <div class="bg-charcoal p-3 rounded-lg border border-gray-700">
+                <div class="grid grid-cols-2 gap-3 sm:gap-4 mb-4">
+                    <div class="bg-charcoal p-2 sm:p-3 rounded-lg border border-gray-700">
                         <div class="text-xs text-gray-400 uppercase">Precio</div>
-                        <div class="text-2xl font-bold text-crimson">$${quinelType.price}</div>
+                        <div class="text-xl sm:text-2xl font-bold text-crimson">$${quinelType.price}</div>
                     </div>
-                    <div class="bg-charcoal p-3 rounded-lg border border-gray-700">
+                    <div class="bg-charcoal p-2 sm:p-3 rounded-lg border border-gray-700">
                         <div class="text-xs text-gray-400 uppercase">Bolsa</div>
-                        <div class="text-xl font-bold text-yellow-400">$${quinelType.accumulated_pot}</div>
+                        <div class="text-lg sm:text-xl font-bold text-yellow-400">$${quinelType.accumulated_pot}</div>
                     </div>
                 </div>
 
-                <button class="w-full bg-gradient-to-r from-dark-red to-crimson text-white py-3 px-4 rounded-xl font-bold hover:from-crimson hover:to-dark-red transition-all duration-300 neon-border">
+                <button class="w-full bg-gradient-to-r from-dark-red to-crimson text-white py-2 sm:py-3 px-4 rounded-xl font-bold hover:from-crimson hover:to-dark-red transition-all duration-300 neon-border text-sm sm:text-base">
                     🎯 Seleccionar Quinela
                 </button>
             </div>
@@ -229,50 +229,50 @@ class QuinelasApp {
         });
 
         const matchDiv = document.createElement('div');
-        matchDiv.className = 'glass-effect border border-gray-600 rounded-xl p-6 animate-fadeIn hover:neon-border transition-all duration-300';
+        matchDiv.className = 'glass-effect border border-gray-600 rounded-xl p-4 sm:p-6 animate-fadeIn hover:neon-border transition-all duration-300';
         
         matchDiv.innerHTML = `
-            <div class="flex items-center justify-between mb-4">
-                <span class="text-lg font-bold gradient-text">⚽ PARTIDO ${matchNumber + 1}</span>
-                <span class="text-sm text-gray-400 bg-charcoal px-3 py-1 rounded-full">${formattedDate} • ${formattedTime}</span>
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
+                <span class="text-base sm:text-lg font-bold gradient-text">⚽ PARTIDO ${matchNumber + 1}</span>
+                <span class="text-xs sm:text-sm text-gray-400 bg-charcoal px-2 sm:px-3 py-1 rounded-full self-start sm:self-auto">${formattedDate} • ${formattedTime}</span>
             </div>
             
-            <div class="grid grid-cols-3 gap-4 mb-4">
+            <div class="grid grid-cols-3 gap-2 sm:gap-4 mb-4">
                 <!-- Home Team -->
                 <button 
-                    class="prediction-btn p-5 border-2 border-gray-600 rounded-xl text-center hover:border-crimson hover:bg-gradient-to-b hover:from-dark-red/20 hover:to-crimson/20 transition-all duration-300 font-bold transform hover:scale-105 glass-effect"
+                    class="prediction-btn p-3 sm:p-5 border-2 border-gray-600 rounded-xl text-center hover:border-crimson hover:bg-gradient-to-b hover:from-dark-red/20 hover:to-crimson/20 transition-all duration-300 font-bold transform hover:scale-105 glass-effect"
                     data-match="${matchNumber}" 
                     data-prediction="home"
                     data-team="${homeTeam}"
                 >
-                    <div class="text-xs text-gray-400 mb-2 uppercase tracking-wide">Local</div>
-                    <div class="text-white font-black text-lg">${homeTeam}</div>
+                    <div class="text-xs text-gray-400 mb-1 sm:mb-2 uppercase tracking-wide">Local</div>
+                    <div class="text-white font-black text-sm sm:text-lg leading-tight">${homeTeam}</div>
                 </button>
                 
                 <!-- Draw -->
                 <button 
-                    class="prediction-btn p-5 border-2 border-gray-600 rounded-xl text-center hover:border-yellow-500 hover:bg-gradient-to-b hover:from-yellow-600/20 hover:to-yellow-500/20 transition-all duration-300 font-bold transform hover:scale-105 glass-effect"
+                    class="prediction-btn p-3 sm:p-5 border-2 border-gray-600 rounded-xl text-center hover:border-yellow-500 hover:bg-gradient-to-b hover:from-yellow-600/20 hover:to-yellow-500/20 transition-all duration-300 font-bold transform hover:scale-105 glass-effect"
                     data-match="${matchNumber}" 
                     data-prediction="draw"
                     data-team="Empate"
                 >
-                    <div class="text-xs text-gray-400 mb-2 uppercase tracking-wide">Empate</div>
-                    <div class="text-yellow-400 font-black text-3xl">=</div>
+                    <div class="text-xs text-gray-400 mb-1 sm:mb-2 uppercase tracking-wide">Empate</div>
+                    <div class="text-yellow-400 font-black text-2xl sm:text-3xl">=</div>
                 </button>
                 
                 <!-- Away Team -->
                 <button 
-                    class="prediction-btn p-5 border-2 border-gray-600 rounded-xl text-center hover:border-crimson hover:bg-gradient-to-b hover:from-dark-red/20 hover:to-crimson/20 transition-all duration-300 font-bold transform hover:scale-105 glass-effect"
+                    class="prediction-btn p-3 sm:p-5 border-2 border-gray-600 rounded-xl text-center hover:border-crimson hover:bg-gradient-to-b hover:from-dark-red/20 hover:to-crimson/20 transition-all duration-300 font-bold transform hover:scale-105 glass-effect"
                     data-match="${matchNumber}" 
                     data-prediction="away"
                     data-team="${awayTeam}"
                 >
-                    <div class="text-xs text-gray-400 mb-2 uppercase tracking-wide">Visitante</div>
-                    <div class="text-white font-black text-lg">${awayTeam}</div>
+                    <div class="text-xs text-gray-400 mb-1 sm:mb-2 uppercase tracking-wide">Visitante</div>
+                    <div class="text-white font-black text-sm sm:text-lg leading-tight">${awayTeam}</div>
                 </button>
             </div>
             
-            <div class="text-sm text-gray-400 text-center bg-charcoal p-2 rounded-lg border border-gray-700">
+            <div class="text-xs sm:text-sm text-gray-400 text-center bg-charcoal p-2 rounded-lg border border-gray-700">
                 🏟️ ${venue}
             </div>
         `;
