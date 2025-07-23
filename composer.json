@@ -1,0 +1,20 @@
+{
+    "name": "gtf/quinelas-app",
+    "description": "Sistema de Quinielas para Liga MX y MLS",
+    "type": "project",
+    "require": {
+        "php": "^8.1",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "scripts": {
+        "start": "php -S 0.0.0.0:$PORT -t .",
+        "deploy": "echo 'Deployment successful'"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist"
+    }
+}
