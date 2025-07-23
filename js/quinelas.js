@@ -8,6 +8,108 @@ class QuinelasApp {
         this.init();
     }
 
+    // Team shield mapping function
+    getTeamShield(teamName, league) {
+        const leagueFolder = league === 'Liga MX' ? 'ligamx' : 'mls';
+        
+        // Normalize team name to match file names
+        const normalizedName = this.normalizeTeamName(teamName);
+        
+        return `shields/${leagueFolder}/${normalizedName}.png`;
+    }
+
+    normalizeTeamName(teamName) {
+        // Map team names to shield file names
+        const teamMappings = {
+            // Liga MX mappings
+            'Club América': 'america',
+            'CF América': 'america',
+            'América': 'america',
+            'Atlas FC': 'atlas',
+            'Atlas': 'atlas',
+            'Atlético San Luis': 'atleticosl',
+            'Cruz Azul': 'cruzazul',
+            'Guadalajara': 'guadalajara',
+            'Chivas': 'guadalajara',
+            'FC Juárez': 'juarez',
+            'Juárez': 'juarez',
+            'León': 'leon',
+            'Club León': 'leon',
+            'FC Mazatlán': 'mazatlan',
+            'Mazatlán': 'mazatlan',
+            'Monterrey': 'monterrey',
+            'CF Monterrey': 'monterrey',
+            'Club Necaxa': 'necaxa',
+            'Necaxa': 'necaxa',
+            'CF Pachuca': 'pachuca',
+            'Pachuca': 'pachuca',
+            'FC Puebla': 'puebla',
+            'Puebla': 'puebla',
+            'Pumas UNAM': 'pumas',
+            'Pumas': 'pumas',
+            'FC Querétaro': 'queretaro',
+            'Querétaro': 'queretaro',
+            'Santos Laguna': 'santos',
+            'Santos': 'santos',
+            'Tigres UANL': 'tigres',
+            'Tigres': 'tigres',
+            'Club Tijuana': 'tijuana',
+            'Tijuana': 'tijuana',
+            'Toluca FC': 'toluca',
+            'Toluca': 'toluca',
+            
+            // MLS mappings
+            'Atlanta United FC': 'atlanta',
+            'Atlanta United': 'atlanta',
+            'Austin FC': 'austin',
+            'Charlotte FC': 'charlotte',
+            'Chicago Fire FC': 'chicago',
+            'Chicago Fire': 'chicago',
+            'FC Cincinnati': 'cincinnati',
+            'Cincinnati': 'cincinnati',
+            'Colorado Rapids': 'colorado',
+            'Columbus Crew': 'columbus',
+            'FC Dallas': 'dallas',
+            'Dallas': 'dallas',
+            'D.C. United': 'dcunited',
+            'DC United': 'dcunited',
+            'Houston Dynamo FC': 'houstondynamo',
+            'Houston Dynamo': 'houstondynamo',
+            'Inter Miami CF': 'intermiami',
+            'Inter Miami': 'intermiami',
+            'Sporting Kansas City': 'kansascity',
+            'Kansas City': 'kansascity',
+            'LAFC': 'losangeles',
+            'Los Angeles FC': 'losangeles',
+            'LA Galaxy': 'losangelesgalaxy',
+            'Los Angeles Galaxy': 'losangelesgalaxy',
+            'Minnesota United FC': 'minnesota',
+            'Minnesota United': 'minnesota',
+            'CF Montréal': 'montreal',
+            'Montreal': 'montreal',
+            'Nashville SC': 'nashville',
+            'New England Revolution': 'newengland',
+            'New York Red Bulls': 'newyork',
+            'New York City FC': 'newyorkcity',
+            'Orlando City SC': 'orlandocity',
+            'Orlando City': 'orlandocity',
+            'Philadelphia Union': 'philadelphia',
+            'Portland Timbers': 'portland',
+            'Real Salt Lake': 'realstaltlake',
+            'San Diego FC': 'sandiego',
+            'San Jose Earthquakes': 'sanjose',
+            'Seattle Sounders FC': 'seattle',
+            'Seattle Sounders': 'seattle',
+            'St. Louis CITY SC': 'st_louis_city',
+            'St Louis City': 'st_louis_city',
+            'Toronto FC': 'toronto',
+            'Vancouver Whitecaps FC': 'vancouver',
+            'Vancouver Whitecaps': 'vancouver'
+        };
+
+        return teamMappings[teamName] || teamName.toLowerCase().replace(/[^a-z0-9]/g, '');
+    }
+
     init() {
         this.loadQuinelaTypes();
         this.setupEventListeners();
@@ -231,44 +333,86 @@ class QuinelasApp {
         const matchDiv = document.createElement('div');
         matchDiv.className = 'glass-effect border border-gray-600 rounded-xl p-4 sm:p-6 animate-fadeIn hover:neon-border transition-all duration-300';
         
+        // Get team shields
+        const homeShield = this.getTeamShield(homeTeam, league);
+        const awayShield = this.getTeamShield(awayTeam, league);
+        
         matchDiv.innerHTML = `
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
-                <span class="text-base sm:text-lg font-bold gradient-text">⚽ PARTIDO ${matchNumber + 1}</span>
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-2">
+                <div class="flex items-center gap-2">
+                    <span class="text-base sm:text-lg font-bold gradient-text">⚽ PARTIDO ${matchNumber + 1}</span>
+                    <span class="text-xs sm:text-sm text-gray-400 font-semibold">${league}</span>
+                </div>
                 <span class="text-xs sm:text-sm text-gray-400 bg-charcoal px-2 sm:px-3 py-1 rounded-full self-start sm:self-auto">${formattedDate} • ${formattedTime}</span>
             </div>
+
+            <!-- Teams matchup display -->
+            <div class="flex items-center justify-between mb-6 px-2">
+                <div class="flex flex-col items-center text-center flex-1">
+                    <img src="${homeShield}" alt="${homeTeam}" class="w-12 h-12 sm:w-16 sm:h-16 mb-2 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="text-2xl sm:text-3xl font-bold text-crimson hidden">🏠</div>
+                    <span class="text-xs sm:text-sm font-bold text-white leading-tight">${homeTeam}</span>
+                    <span class="text-xs text-gray-400">LOCAL</span>
+                </div>
+                
+                <div class="flex flex-col items-center mx-4">
+                    <div class="text-2xl sm:text-3xl font-bold text-gray-400 mb-1">VS</div>
+                    <div class="text-xs text-gray-500">${formattedTime}</div>
+                </div>
+                
+                <div class="flex flex-col items-center text-center flex-1">
+                    <img src="${awayShield}" alt="${awayTeam}" class="w-12 h-12 sm:w-16 sm:h-16 mb-2 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="text-2xl sm:text-3xl font-bold text-crimson hidden">✈️</div>
+                    <span class="text-xs sm:text-sm font-bold text-white leading-tight">${awayTeam}</span>
+                    <span class="text-xs text-gray-400">VISITANTE</span>
+                </div>
+            </div>
             
-            <div class="grid grid-cols-3 gap-2 sm:gap-4 mb-4">
+            <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-4">
                 <!-- Home Team -->
                 <button 
-                    class="prediction-btn p-3 sm:p-5 border-2 border-gray-600 rounded-xl text-center hover:border-crimson hover:bg-gradient-to-b hover:from-dark-red/20 hover:to-crimson/20 transition-all duration-300 font-bold transform hover:scale-105 glass-effect"
+                    class="prediction-btn p-3 sm:p-4 border-2 border-gray-600 rounded-xl text-center hover:border-crimson hover:bg-gradient-to-b hover:from-dark-red/20 hover:to-crimson/20 transition-all duration-300 font-bold transform hover:scale-105 glass-effect group"
                     data-match="${matchNumber}" 
                     data-prediction="home"
                     data-team="${homeTeam}"
                 >
-                    <div class="text-xs text-gray-400 mb-1 sm:mb-2 uppercase tracking-wide">Local</div>
-                    <div class="text-white font-black text-sm sm:text-lg leading-tight">${homeTeam}</div>
+                    <div class="flex flex-col items-center">
+                        <img src="${homeShield}" alt="${homeTeam}" class="w-8 h-8 sm:w-10 sm:h-10 mb-2 object-contain group-hover:scale-110 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div class="text-lg sm:text-xl font-bold text-crimson hidden">🏠</div>
+                        <div class="text-xs text-gray-400 uppercase tracking-wide">Local</div>
+                        <div class="text-white font-bold text-xs sm:text-sm leading-tight mt-1">${homeTeam.split(' ')[0]}</div>
+                    </div>
                 </button>
                 
                 <!-- Draw -->
                 <button 
-                    class="prediction-btn p-3 sm:p-5 border-2 border-gray-600 rounded-xl text-center hover:border-yellow-500 hover:bg-gradient-to-b hover:from-yellow-600/20 hover:to-yellow-500/20 transition-all duration-300 font-bold transform hover:scale-105 glass-effect"
+                    class="prediction-btn p-3 sm:p-4 border-2 border-gray-600 rounded-xl text-center hover:border-yellow-500 hover:bg-gradient-to-b hover:from-yellow-600/20 hover:to-yellow-500/20 transition-all duration-300 font-bold transform hover:scale-105 glass-effect group"
                     data-match="${matchNumber}" 
                     data-prediction="draw"
                     data-team="Empate"
                 >
-                    <div class="text-xs text-gray-400 mb-1 sm:mb-2 uppercase tracking-wide">Empate</div>
-                    <div class="text-yellow-400 font-black text-2xl sm:text-3xl">=</div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 mb-2 flex items-center justify-center">
+                            <div class="text-yellow-400 font-black text-2xl sm:text-3xl group-hover:scale-110 transition-transform">=</div>
+                        </div>
+                        <div class="text-xs text-gray-400 uppercase tracking-wide">Empate</div>
+                        <div class="text-yellow-400 font-bold text-xs sm:text-sm leading-tight mt-1">Empate</div>
+                    </div>
                 </button>
                 
                 <!-- Away Team -->
                 <button 
-                    class="prediction-btn p-3 sm:p-5 border-2 border-gray-600 rounded-xl text-center hover:border-crimson hover:bg-gradient-to-b hover:from-dark-red/20 hover:to-crimson/20 transition-all duration-300 font-bold transform hover:scale-105 glass-effect"
+                    class="prediction-btn p-3 sm:p-4 border-2 border-gray-600 rounded-xl text-center hover:border-crimson hover:bg-gradient-to-b hover:from-dark-red/20 hover:to-crimson/20 transition-all duration-300 font-bold transform hover:scale-105 glass-effect group"
                     data-match="${matchNumber}" 
                     data-prediction="away"
                     data-team="${awayTeam}"
                 >
-                    <div class="text-xs text-gray-400 mb-1 sm:mb-2 uppercase tracking-wide">Visitante</div>
-                    <div class="text-white font-black text-sm sm:text-lg leading-tight">${awayTeam}</div>
+                    <div class="flex flex-col items-center">
+                        <img src="${awayShield}" alt="${awayTeam}" class="w-8 h-8 sm:w-10 sm:h-10 mb-2 object-contain group-hover:scale-110 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div class="text-lg sm:text-xl font-bold text-crimson hidden">✈️</div>
+                        <div class="text-xs text-gray-400 uppercase tracking-wide">Visitante</div>
+                        <div class="text-white font-bold text-xs sm:text-sm leading-tight mt-1">${awayTeam.split(' ')[0]}</div>
+                    </div>
                 </button>
             </div>
             
