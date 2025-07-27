@@ -109,10 +109,23 @@ class Database {
             )
         ");
         
+        // Create match_results table for admin to store real results
+        $this->db->exec("
+            CREATE TABLE IF NOT EXISTS match_results (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                match_key VARCHAR(100) UNIQUE NOT NULL,
+                match_name VARCHAR(200) NOT NULL,
+                result VARCHAR(100) NOT NULL,
+                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                updated_by VARCHAR(100) DEFAULT 'admin'
+            )
+        ");
+        
         // Create indexes
         $this->db->exec("CREATE INDEX IF NOT EXISTS idx_folio ON predictions(folio)");
         $this->db->exec("CREATE INDEX IF NOT EXISTS idx_prediction_id ON prediction_matches(prediction_id)");
         $this->db->exec("CREATE INDEX IF NOT EXISTS idx_quinela_type ON predictions(quinela_type_id)");
+        $this->db->exec("CREATE INDEX IF NOT EXISTS idx_match_key ON match_results(match_key)");
     }
     
     private function checkAndMigrateSchema() {

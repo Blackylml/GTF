@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Resultados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-red': '#8B0000',
+                        'crimson': '#DC143C',
+                        'blood-red': '#CC0000',
+                        'charcoal': '#1a1a1a',
+                        'slate-dark': '#0f0f0f'
+                    },
+                    animation: {
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'pulse-red': 'pulse-red 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fadeIn': 'fadeIn 0.5s ease-in'
+                    },
+                    keyframes: {
+                        glow: {
+                            'from': { boxShadow: '0 0 20px #DC143C' },
+                            'to': { boxShadow: '0 0 30px #DC143C, 0 0 40px #DC143C' }
+                        },
+                        'pulse-red': {
+                            '0%, 100%': { opacity: 1 },
+                            '50%': { opacity: .7 }
+                        },
+                        fadeIn: {
+                            'from': { opacity: 0, transform: 'translateY(20px)' },
+                            'to': { opacity: 1, transform: 'translateY(0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #8B0000 100%);
+            background-attachment: fixed;
+        }
+        .glass-effect {
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(220, 20, 60, 0.2);
+        }
+        .neon-border {
+            box-shadow: 0 0 20px rgba(220, 20, 60, 0.3), inset 0 0 20px rgba(220, 20, 60, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #DC143C, #FF6B6B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-white">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="glass-effect neon-border rounded-xl p-4 sm:p-8 mb-8 animate-fadeIn">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-center gradient-text mb-4">
+                ⚙️ PANEL DE ADMINISTRACIÓN
+            </h1>
+            <h2 class="text-lg sm:text-xl lg:text-2xl font-bold text-center text-crimson mb-3">
+                Captura de Resultados Reales
+            </h2>
+            <p class="text-center text-gray-300 text-base sm:text-lg">
+                Ingresa los resultados reales de los partidos para calcular los aciertos
+            </p>
+            <div class="flex justify-center mt-4">
+                <div class="w-32 h-1 bg-gradient-to-r from-crimson to-dark-red rounded-full animate-pulse-red"></div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="glass-effect rounded-lg p-4 mb-6">
+            <div class="flex items-center justify-between">
+                <a href="results.html" class="flex items-center text-gray-300 hover:text-crimson transition-colors">
+                    ← Volver a Resultados
+                </a>
+                <div class="flex gap-4">
+                    <a href="admin.html" class="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-4 py-2 rounded-lg hover:from-blue-700 hover:to-blue-900 transition-all duration-300 font-bold text-sm">
+                        📊 Admin Principal
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success/Error Messages -->
+        <div id="success-message" class="glass-effect border-2 border-green-500 text-green-300 px-6 py-4 rounded-xl mb-6 hidden neon-border">
+            <p class="font-bold text-green-400 text-lg">✅ Éxito:</p>
+            <p id="success-text" class="text-green-200"></p>
+        </div>
+
+        <div id="error-message" class="glass-effect border-2 border-red-500 text-red-300 px-6 py-4 rounded-xl mb-6 hidden neon-border">
+            <p class="font-bold text-red-400 text-lg">🚨 Error:</p>
+            <p id="error-text" class="text-red-200"></p>
+        </div>
+
+        <!-- Results Form -->
+        <div class="glass-effect neon-border rounded-xl p-4 sm:p-6 lg:p-8 mb-8 animate-fadeIn">
+            <h3 class="text-2xl sm:text-3xl font-bold gradient-text mb-6 text-center">
+                ⚽ Capturar Resultados de Partidos
+            </h3>
+            
+            <form id="results-form" class="space-y-6">
+                <!-- Liga MX Section -->
+                <div class="bg-charcoal rounded-lg p-6 border border-gray-600">
+                    <h4 class="text-xl font-bold text-crimson mb-4 flex items-center">
+                        🇲🇽 LIGA MX
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-300">Querétaro vs Pumas</label>
+                            <select name="queretaro_vs_pumas" class="w-full bg-slate-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-crimson focus:outline-none">
+                                <option value="">Seleccionar resultado</option>
+                                <option value="Queretaro">Querétaro</option>
+                                <option value="Pumas">Pumas</option>
+                                <option value="Empate">Empate</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-300">Puebla vs Santos</label>
+                            <select name="puebla_vs_santos" class="w-full bg-slate-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-crimson focus:outline-none">
+                                <option value="">Seleccionar resultado</option>
+                                <option value="Puebla">Puebla</option>
+                                <option value="Santos">Santos</option>
+                                <option value="Empate">Empate</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-300">Tijuana vs Juárez</label>
+                            <select name="tijuana_vs_juarez" class="w-full bg-slate-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-crimson focus:outline-none">
+                                <option value="">Seleccionar resultado</option>
+                                <option value="Tijuana">Tijuana</option>
+                                <option value="Juarez">Juárez</option>
+                                <option value="Empate">Empate</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-300">Pachuca vs Mazatlán</label>
+                            <select name="pachuca_vs_mazatlan" class="w-full bg-slate-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-crimson focus:outline-none">
+                                <option value="">Seleccionar resultado</option>
+                                <option value="Pachuca">Pachuca</option>
+                                <option value="Mazatlan">Mazatlán</option>
+                                <option value="Empate">Empate</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-300">Chivas vs San Luis</label>
+                            <select name="chivas_vs_san_luis" class="w-full bg-slate-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-crimson focus:outline-none">
+                                <option value="">Seleccionar resultado</option>
+                                <option value="Chivas">Chivas</option>
+                                <option value="San Luis">San Luis</option>
+                                <option value="Empate">Empate</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-300">Toluca vs Tigres</label>
+                            <select name="toluca_vs_tigres" class="w-full bg-slate-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-crimson focus:outline-none">
+                                <option value="">Seleccionar resultado</option>
+                                <option value="Toluca">Toluca</option>
+                                <option value="Tigres">Tigres</option>
+                                <option value="Empate">Empate</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-300">Monterrey vs Atlas</label>
+                            <select name="monterrey_vs_atlas" class="w-full bg-slate-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-crimson focus:outline-none">
+                                <option value="">Seleccionar resultado</option>
+                                <option value="Monterrey">Monterrey</option>
+                                <option value="Atlas">Atlas</option>
+                                <option value="Empate">Empate</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-300">Cruz Azul vs León</label>
+                            <select name="cruz_azul_vs_leon" class="w-full bg-slate-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-crimson focus:outline-none">
+                                <option value="">Seleccionar resultado</option>
+                                <option value="Cruz Azul">Cruz Azul</option>
+                                <option value="Leon">León</option>
+                                <option value="Empate">Empate</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-300">Necaxa vs América</label>
+                            <select name="necaxa_vs_america" class="w-full bg-slate-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-crimson focus:outline-none">
+                                <option value="">Seleccionar resultado</option>
+                                <option value="Necaxa">Necaxa</option>
+                                <option value="America">América</option>
+                                <option value="Empate">Empate</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MLS Section -->
+                <div class="bg-charcoal rounded-lg p-6 border border-gray-600">
+                    <h4 class="text-xl font-bold text-crimson mb-4 flex items-center">
+                        🇺🇸 MLS
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-300">Dallas vs NYC FC</label>
+                            <select name="dallas_vs_nyc" class="w-full bg-slate-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-crimson focus:outline-none">
+                                <option value="">Seleccionar resultado</option>
+                                <option value="Dallas">Dallas</option>
+                                <option value="NYC">NYC FC</option>
+                                <option value="Empate">Empate</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-300">LAFC vs Portland</label>
+                            <select name="lafc_vs_portland" class="w-full bg-slate-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-crimson focus:outline-none">
+                                <option value="">Seleccionar resultado</option>
+                                <option value="LAFC">LAFC</option>
+                                <option value="Portland Timb">Portland</option>
+                                <option value="Empate">Empate</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-300">Inter Miami vs Cincinnati</label>
+                            <select name="inter_miami_vs_cincinnati" class="w-full bg-slate-dark border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-crimson focus:outline-none">
+                                <option value="">Seleccionar resultado</option>
+                                <option value="Inter Miami">Inter Miami</option>
+                                <option value="Cincinnati">Cincinnati</option>
+                                <option value="Empate">Empate</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Section -->
+                <div class="text-center pt-4 space-y-4">
+                    <button 
+                        type="submit" 
+                        class="bg-gradient-to-r from-dark-red to-crimson text-white px-8 py-4 rounded-xl font-bold text-lg hover:from-crimson hover:to-dark-red transition-all duration-300 transform hover:scale-105 neon-border w-full sm:w-auto"
+                    >
+                        💾 Guardar Todos los Resultados
+                    </button>
+                    
+                    <div class="text-gray-400 text-sm">
+                        O puedes actualizar partidos individuales abajo ↓
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Individual Match Updates -->
+        <div class="glass-effect neon-border rounded-xl p-4 sm:p-6 lg:p-8 mb-8 animate-fadeIn">
+            <h3 class="text-xl sm:text-2xl font-bold gradient-text mb-4 text-center">
+                ⚽ Actualizar Partidos Individuales
+            </h3>
+            <div id="individual-matches-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Individual match cards will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Current Results Display -->
+        <div id="current-results" class="glass-effect neon-border rounded-xl p-4 sm:p-6 lg:p-8 animate-fadeIn">
+            <h3 class="text-xl sm:text-2xl font-bold gradient-text mb-4 text-center">
+                📋 Resultados Actuales
+            </h3>
+            <div id="current-results-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Current results will be loaded here -->
+            </div>
+            <div class="text-center mt-6">
+                <button 
+                    id="load-current" 
+                    class="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-6 py-3 rounded-lg hover:from-blue-700 hover:to-blue-900 transition-all duration-300 font-bold"
+                >
+                    🔄 Cargar Resultados Actuales
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin-results.js"></script>
+</body>
+</html>
